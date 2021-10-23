@@ -1,64 +1,54 @@
 <template>
   <v-app>
-    <v-form
-      ref="form"
-      v-model="valid"
-      lazy-validation
-    >
-      <v-text-field
-        v-model="name"
-        :counter="10"
-        :rules="nameRules"
-        label="Name"
-        required
-      ></v-text-field>
-
-      <v-text-field
-        v-model="email"
-        :rules="emailRules"
-        label="E-mail"
-        required
-      ></v-text-field>
-
-      <v-select
-        v-model="select"
-        :items="items"
-        :rules="[v => !!v || 'Item is required']"
-        label="Item"
-        required
-      ></v-select>
-
-      <v-checkbox
-        v-model="checkbox"
-        :rules="[v => !!v || 'You must agree to continue!']"
-        label="Do you agree?"
-        required
-      ></v-checkbox>
-
-      <v-btn
-        :disabled="!valid"
-        color="success"
-        class="mr-4"
-        @click="validate"
+    <v-container>
+      <v-form
+        ref="form"
+        v-model="valid"
+        lazy-validation
       >
-        Validate
-      </v-btn>
+        <v-text-field
+          v-model="name"
+          :counter="10"
+          label="仕事タイトル"
+          required
+        ></v-text-field>
 
-      <v-btn
-        color="error"
-        class="mr-4"
-        @click="reset"
-      >
-        Reset Form
-      </v-btn>
+        <v-select
+          v-model="select"
+          :items="businesses"
+          item-text="name"
+          item-value="id"
+          :rules="[v => !!v || '必須です']"
+          label="職業"
+          required
+          return-object
+        ></v-select>
 
-      <v-btn
-        color="warning"
-        @click="resetValidation"
-      >
-        Reset Validation
-      </v-btn>
-    </v-form>
+        <v-select
+          v-model="select"
+          :items="occupations"
+          item-text="name"
+          item-value="id"
+          :rules="[v => !!v || '必須項目です']"
+          label="職種"
+          required
+        ></v-select>
+
+        <v-date-picker
+          v-model="date"
+          class="mt-4"
+          min="2016-06-15"
+          max="2018-03-20"
+        ></v-date-picker>
+
+        <v-btn
+          color="warning"
+          @click="save()"
+        >
+          保存
+        </v-btn>
+      </v-form>
+      </v-container>
   </v-app>
 </template>
 
@@ -67,15 +57,6 @@
     data: () => ({
       valid: true,
       name: '',
-      nameRules: [
-        v => !!v || 'Name is required',
-        v => (v && v.length <= 10) || 'Name must be less than 10 characters',
-      ],
-      email: '',
-      emailRules: [
-        v => !!v || 'E-mail is required',
-        v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
-      ],
       select: null,
       items: [
         'Item 1',
@@ -83,7 +64,10 @@
         'Item 3',
         'Item 4',
       ],
+      businesses: [],
+      occupations: [],
       checkbox: false,
+      date: '2018-03-02',
     }),
 
     methods: {
@@ -96,6 +80,74 @@
       resetValidation () {
         this.$refs.form.resetValidation()
       },
+      save() {
+        var __this = this
+            __this.processing = true
+            $.ajax({
+                type: 'POST',
+                url: SAVE_RESULT_URL,
+                dataType: 'json',
+                data: __this.answers,
+            })
+                .done(function(response){
+                    //response は前回の診断の mapping_num
+                    console.log('saveing answers success')
+                    if (response.mapping_num >= 1) {
+                        console.log('2回目以降')
+                        window.location.href = NTH_RESULT_URL;
+                    } else {
+                        console.log('初回')
+                        window.location.href = GET_EVALUATIONS_URL;
+                    }
+                })
+                .fail(function(error){
+                    console.log(console.log(error))
+                    __this.processing = false
+                })
+      }
     },
+    created() {
+      var __this = this
+            $.ajax({
+                type: 'GET',
+                url: "http://localhost:8120/" + 'api/get_businesses',
+                dataType: 'json',
+            })
+                .done(function(response){
+                    //response は前回の診断の mapping_num
+                    console.log(Object.keys(response).length)
+                    var length = Object.keys(response).length
+                    var keys = Object.keys(response)
+
+                    console.log(response)
+                    for (let i = 0; i < length; i++) {
+                      __this.businesses.push({'id': keys[i], 'name': response[keys[i]]})
+                    }
+                    console.log('done')
+                })
+                .fail(function(error){
+                    console.log(console.log(error))
+                })
+            $.ajax({
+                type: 'GET',
+                url: "http://localhost:8120/" + 'api/get_occupations',
+                dataType: 'json',
+            })
+                .done(function(response){
+                    //response は前回の診断の mapping_num
+                    console.log(Object.keys(response).length)
+                    var length = Object.keys(response).length
+                    var keys = Object.keys(response)
+
+                    console.log(response)
+                    for (let i = 0; i < length; i++) {
+                      __this.occupations.push({'id': keys[i], 'name': response[keys[i]]})
+                    }
+                    console.log('done')
+                })
+                .fail(function(error){
+                    console.log(console.log(error))
+                })
+    }
   }
 </script>
