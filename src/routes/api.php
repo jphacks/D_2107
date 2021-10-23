@@ -17,3 +17,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/get_all_experiences', [JobExperienceController::class, 'getAllExperiences']);
+Route::get('/get_businesses', [JobExperienceController::class, 'getBusinesses']);
+Route::get('/get_occurpations', [JobExperienceController::class, 'getOccurpations']);
+Route::post('/job_experience/store', [JobExperienceController::class, 'store']);
