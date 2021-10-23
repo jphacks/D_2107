@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/profile', function () {
+Route::get('/JobExperience', function () {
     return view('welcome');
 });
 
@@ -27,4 +27,9 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/', function () { return view('welcome'); });
+
+    Route::group(['prefix'=>'jobExperience', 'as'=>'jobExperience.', 'namespace'=>'JobExperience'], function () {
+        Route::get('/create', 'JobExperienceController@create')->name('create');
+        Route::get('/show', 'JobExperienceController@show')->name('show');
+    });
 });
