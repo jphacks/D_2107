@@ -13,7 +13,7 @@ class JobExperienceController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function show() {
-        return view('show');
+        return view('jobExperience.show');
     }
 
     public function getAllExperiences(){
@@ -22,7 +22,8 @@ class JobExperienceController extends BaseController
         return response()->json($jobExperience);
     }
 
-    public function create() {
-        return view('create');
+    public function create()
+    {
+        return view('jobExperience.create');
     }
 }
