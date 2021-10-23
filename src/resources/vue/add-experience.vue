@@ -75,11 +75,44 @@
         this.$refs.form.resetValidation()
       },
       save() {
-
+        var __this = this
+            __this.processing = true
+            $.ajax({
+                type: 'POST',
+                url: SAVE_RESULT_URL,
+                dataType: 'json',
+                data: __this.answers,
+            })
+                .done(function(response){
+                    //response は前回の診断の mapping_num
+                    console.log('saveing answers success')
+                    if (response.mapping_num >= 1) {
+                        console.log('2回目以降')
+                        window.location.href = NTH_RESULT_URL;
+                    } else {
+                        console.log('初回')
+                        window.location.href = GET_EVALUATIONS_URL;
+                    }
+                })
+                .fail(function(error){
+                    console.log(console.log(error))
+                    __this.processing = false
+                })
       }
     },
     created() {
-      
+      var __this = this
+            $.ajax({
+                type: 'GET',
+                url: SAVE_RESULT_URL,
+                dataType: 'json',
+            })
+                .done(function(response){
+                    //response は前回の診断の mapping_num
+                })
+                .fail(function(error){
+                    console.log(console.log(error))
+                })
     }
   }
 </script>
