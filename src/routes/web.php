@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobExperienceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::get('/JobExperience', function () {
-    return view('welcome');
-});
+// Route::get('/JobExperience', function () {
+//     return view('welcome');
+// });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
@@ -28,8 +29,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => 'auth:web'], function () {
     Route::get('/', function () { return view('welcome'); });
 
-    Route::group(['prefix'=>'jobExperience', 'as'=>'jobExperience.', 'namespace'=>'JobExperience'], function () {
-        Route::get('/create', 'JobExperienceController@create')->name('create');
-        Route::get('/show', 'JobExperienceController@show')->name('show');
+    Route::group(['prefix'=>'job-experience', 'as'=>'jobExperience.'], function () {
+        Route::get('/create', [JobExperienceController::class, 'create'])->name('create');
+        Route::get('/show', [JobExperienceController::class, 'show'])->name('show');
     });
 });
