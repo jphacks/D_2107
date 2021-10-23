@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobExperience;
 use App\Models\MasterBusiness;
-use App\Models\MasterOccurpation;
+use App\Models\MasterOccupation;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -16,7 +16,7 @@ class JobExperienceController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function show() {
-        $this->getOccurpations();
+        $this->getOccupations();
         return view('jobExperience.show');
     }
 
@@ -31,9 +31,9 @@ class JobExperienceController extends BaseController
         return response()->json($businesses);
     }
 
-    public function getOccurpations(){
-        $occurpations = MasterOccurpation::all()->pluck('name', 'id');
-        return response()->json($occurpations);
+    public function getOccupations(){
+        $occupations = MasterOccupation::all()->pluck('name', 'id');
+        return response()->json($occupations);
     }
 
     public function store(Request $request){
