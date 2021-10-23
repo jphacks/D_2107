@@ -2115,39 +2115,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       valid: true,
       name: '',
-      nameRules: [function (v) {
-        return !!v || 'Name is required';
-      }, function (v) {
-        return v && v.length <= 10 || 'Name must be less than 10 characters';
-      }],
-      email: '',
-      emailRules: [function (v) {
-        return !!v || 'E-mail is required';
-      }, function (v) {
-        return /.+@.+\..+/.test(v) || 'E-mail must be valid';
-      }],
       select: null,
       items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
-      checkbox: false
+      checkbox: false,
+      date: '2018-03-02'
     };
   },
   methods: {
@@ -2159,8 +2135,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     resetValidation: function resetValidation() {
       this.$refs.form.resetValidation();
-    }
-  }
+    },
+    save: function save() {}
+  },
+  created: function created() {}
 });
 
 /***/ }),
@@ -38080,109 +38058,104 @@ var render = function() {
     "v-app",
     [
       _c(
-        "v-form",
-        {
-          ref: "form",
-          attrs: { "lazy-validation": "" },
-          model: {
-            value: _vm.valid,
-            callback: function($$v) {
-              _vm.valid = $$v
-            },
-            expression: "valid"
-          }
-        },
+        "v-container",
         [
-          _c("v-text-field", {
-            attrs: {
-              counter: 10,
-              rules: _vm.nameRules,
-              label: "Name",
-              required: ""
-            },
-            model: {
-              value: _vm.name,
-              callback: function($$v) {
-                _vm.name = $$v
-              },
-              expression: "name"
-            }
-          }),
-          _vm._v(" "),
-          _c("v-text-field", {
-            attrs: { rules: _vm.emailRules, label: "E-mail", required: "" },
-            model: {
-              value: _vm.email,
-              callback: function($$v) {
-                _vm.email = $$v
-              },
-              expression: "email"
-            }
-          }),
-          _vm._v(" "),
-          _c("v-select", {
-            attrs: {
-              items: _vm.items,
-              rules: [
-                function(v) {
-                  return !!v || "Item is required"
-                }
-              ],
-              label: "Item",
-              required: ""
-            },
-            model: {
-              value: _vm.select,
-              callback: function($$v) {
-                _vm.select = $$v
-              },
-              expression: "select"
-            }
-          }),
-          _vm._v(" "),
-          _c("v-checkbox", {
-            attrs: {
-              rules: [
-                function(v) {
-                  return !!v || "You must agree to continue!"
-                }
-              ],
-              label: "Do you agree?",
-              required: ""
-            },
-            model: {
-              value: _vm.checkbox,
-              callback: function($$v) {
-                _vm.checkbox = $$v
-              },
-              expression: "checkbox"
-            }
-          }),
-          _vm._v(" "),
           _c(
-            "v-btn",
+            "v-form",
             {
-              staticClass: "mr-4",
-              attrs: { disabled: !_vm.valid, color: "success" },
-              on: { click: _vm.validate }
+              ref: "form",
+              attrs: { "lazy-validation": "" },
+              model: {
+                value: _vm.valid,
+                callback: function($$v) {
+                  _vm.valid = $$v
+                },
+                expression: "valid"
+              }
             },
-            [_vm._v("\n      Validate\n    ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              staticClass: "mr-4",
-              attrs: { color: "error" },
-              on: { click: _vm.reset }
-            },
-            [_vm._v("\n      Reset Form\n    ")]
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { attrs: { color: "warning" }, on: { click: _vm.resetValidation } },
-            [_vm._v("\n      Reset Validation\n    ")]
+            [
+              _c("v-text-field", {
+                attrs: {
+                  counter: 10,
+                  rules: _vm.nameRules,
+                  label: "仕事タイトル",
+                  required: ""
+                },
+                model: {
+                  value: _vm.name,
+                  callback: function($$v) {
+                    _vm.name = $$v
+                  },
+                  expression: "name"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-select", {
+                attrs: {
+                  items: _vm.items,
+                  rules: [
+                    function(v) {
+                      return !!v || "Item is required"
+                    }
+                  ],
+                  label: "職業",
+                  required: ""
+                },
+                model: {
+                  value: _vm.select,
+                  callback: function($$v) {
+                    _vm.select = $$v
+                  },
+                  expression: "select"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-select", {
+                attrs: {
+                  items: _vm.items,
+                  rules: [
+                    function(v) {
+                      return !!v || "Item is required"
+                    }
+                  ],
+                  label: "職種",
+                  required: ""
+                },
+                model: {
+                  value: _vm.select,
+                  callback: function($$v) {
+                    _vm.select = $$v
+                  },
+                  expression: "select"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-date-picker", {
+                staticClass: "mt-4",
+                attrs: { min: "2016-06-15", max: "2018-03-20" },
+                model: {
+                  value: _vm.date,
+                  callback: function($$v) {
+                    _vm.date = $$v
+                  },
+                  expression: "date"
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "v-btn",
+                {
+                  attrs: { color: "warning" },
+                  on: {
+                    click: function($event) {
+                      return _vm.save()
+                    }
+                  }
+                },
+                [_vm._v("\n        保存\n      ")]
+              )
+            ],
+            1
           )
         ],
         1
