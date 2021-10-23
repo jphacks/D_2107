@@ -2115,6 +2115,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2122,6 +2126,8 @@ __webpack_require__.r(__webpack_exports__);
       name: '',
       select: null,
       items: ['Item 1', 'Item 2', 'Item 3', 'Item 4'],
+      businesses: [],
+      occupations: [],
       checkbox: false,
       date: '2018-03-02'
     };
@@ -2167,9 +2173,45 @@ __webpack_require__.r(__webpack_exports__);
 
     $.ajax({
       type: 'GET',
-      url: SAVE_RESULT_URL,
+      url: "http://localhost:8120/" + 'api/get_businesses',
       dataType: 'json'
-    }).done(function (response) {//response は前回の診断の mapping_num
+    }).done(function (response) {
+      //response は前回の診断の mapping_num
+      console.log(Object.keys(response).length);
+      var length = Object.keys(response).length;
+      var keys = Object.keys(response);
+      console.log(response);
+
+      for (var i = 0; i < length; i++) {
+        __this.businesses.push({
+          'id': keys[i],
+          'name': response[keys[i]]
+        });
+      }
+
+      console.log('done');
+    }).fail(function (error) {
+      console.log(console.log(error));
+    });
+    $.ajax({
+      type: 'GET',
+      url: "http://localhost:8120/" + 'api/get_occupations',
+      dataType: 'json'
+    }).done(function (response) {
+      //response は前回の診断の mapping_num
+      console.log(Object.keys(response).length);
+      var length = Object.keys(response).length;
+      var keys = Object.keys(response);
+      console.log(response);
+
+      for (var i = 0; i < length; i++) {
+        __this.occupations.push({
+          'id': keys[i],
+          'name': response[keys[i]]
+        });
+      }
+
+      console.log('done');
     }).fail(function (error) {
       console.log(console.log(error));
     });
@@ -38110,12 +38152,7 @@ var render = function() {
             },
             [
               _c("v-text-field", {
-                attrs: {
-                  counter: 10,
-                  rules: _vm.nameRules,
-                  label: "仕事タイトル",
-                  required: ""
-                },
+                attrs: { counter: 10, label: "仕事タイトル", required: "" },
                 model: {
                   value: _vm.name,
                   callback: function($$v) {
@@ -38127,14 +38164,17 @@ var render = function() {
               _vm._v(" "),
               _c("v-select", {
                 attrs: {
-                  items: _vm.items,
+                  items: _vm.businesses,
+                  "item-text": "name",
+                  "item-value": "id",
                   rules: [
                     function(v) {
-                      return !!v || "Item is required"
+                      return !!v || "必須です"
                     }
                   ],
                   label: "職業",
-                  required: ""
+                  required: "",
+                  "return-object": ""
                 },
                 model: {
                   value: _vm.select,
@@ -38147,10 +38187,12 @@ var render = function() {
               _vm._v(" "),
               _c("v-select", {
                 attrs: {
-                  items: _vm.items,
+                  items: _vm.occupations,
+                  "item-text": "name",
+                  "item-value": "id",
                   rules: [
                     function(v) {
-                      return !!v || "Item is required"
+                      return !!v || "必須項目です"
                     }
                   ],
                   label: "職種",

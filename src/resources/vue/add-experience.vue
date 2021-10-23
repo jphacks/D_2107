@@ -9,23 +9,27 @@
         <v-text-field
           v-model="name"
           :counter="10"
-          :rules="nameRules"
           label="仕事タイトル"
           required
         ></v-text-field>
 
         <v-select
           v-model="select"
-          :items="items"
-          :rules="[v => !!v || 'Item is required']"
+          :items="businesses"
+          item-text="name"
+          item-value="id"
+          :rules="[v => !!v || '必須です']"
           label="職業"
           required
+          return-object
         ></v-select>
 
         <v-select
           v-model="select"
-          :items="items"
-          :rules="[v => !!v || 'Item is required']"
+          :items="occupations"
+          item-text="name"
+          item-value="id"
+          :rules="[v => !!v || '必須項目です']"
           label="職種"
           required
         ></v-select>
@@ -60,6 +64,8 @@
         'Item 3',
         'Item 4',
       ],
+      businesses: [],
+      occupations: [],
       checkbox: false,
       date: '2018-03-02',
     }),
@@ -104,11 +110,40 @@
       var __this = this
             $.ajax({
                 type: 'GET',
-                url: SAVE_RESULT_URL,
+                url: "http://localhost:8120/" + 'api/get_businesses',
                 dataType: 'json',
             })
                 .done(function(response){
                     //response は前回の診断の mapping_num
+                    console.log(Object.keys(response).length)
+                    var length = Object.keys(response).length
+                    var keys = Object.keys(response)
+
+                    console.log(response)
+                    for (let i = 0; i < length; i++) {
+                      __this.businesses.push({'id': keys[i], 'name': response[keys[i]]})
+                    }
+                    console.log('done')
+                })
+                .fail(function(error){
+                    console.log(console.log(error))
+                })
+            $.ajax({
+                type: 'GET',
+                url: "http://localhost:8120/" + 'api/get_occupations',
+                dataType: 'json',
+            })
+                .done(function(response){
+                    //response は前回の診断の mapping_num
+                    console.log(Object.keys(response).length)
+                    var length = Object.keys(response).length
+                    var keys = Object.keys(response)
+
+                    console.log(response)
+                    for (let i = 0; i < length; i++) {
+                      __this.occupations.push({'id': keys[i], 'name': response[keys[i]]})
+                    }
+                    console.log('done')
                 })
                 .fail(function(error){
                     console.log(console.log(error))

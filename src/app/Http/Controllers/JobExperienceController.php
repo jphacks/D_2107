@@ -31,7 +31,7 @@ class JobExperienceController extends BaseController
         return response()->json($businesses);
     }
 
-    public function getOccurpations(){
+    public function getOccupations(){
         $occurpations = MasterOccurpation::all()->pluck('name', 'id');
         return response()->json($occurpations);
     }
