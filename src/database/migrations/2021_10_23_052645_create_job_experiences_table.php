@@ -19,12 +19,12 @@ class CreateJobExperiencesTable extends Migration
             $table->string('title');
             $table->date('work_start_date');
             $table->date('work_end_date');
-            $table->bigInteger('master_occurpation_id')->unsigned();
+            $table->bigInteger('master_occupation_id')->unsigned();
             $table->bigInteger('master_business_id')->unsigned();
             $table->timestamps();
 
             // 外部キー制約
-            $table->foreign('master_occurpation_id')->references('id')->on('master_occurpations')->onDelete('cascade');
+            $table->foreign('master_occupation_id')->references('id')->on('master_occupations')->onDelete('cascade');
             $table->foreign('master_business_id')->references('id')->on('master_businesses')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });

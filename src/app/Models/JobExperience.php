@@ -19,7 +19,7 @@ class JobExperience extends Model
         'title',
         'work_start_date',
         'work_end_date',
-        'master_occurpation_id',
+        'master_occupation_id',
         'master_business_id',
     ];
 
@@ -40,9 +40,9 @@ class JobExperience extends Model
      *
      * @return void
      */
-    public function occurpation()
+    public function occupation()
     {
-        return $this->belongsTo(MasterOccurpation::class, 'master_occurpation_id')->withDefault();
+        return $this->belongsTo(MasterOccupation::class, 'master_occupation_id')->withDefault();
     }
 
     /**
