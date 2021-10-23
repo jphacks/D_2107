@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobExperienceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,5 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/get_all_experiences', [JobExperienceController::class, 'getAllExperiences']);
 Route::get('/get_businesses', [JobExperienceController::class, 'getBusinesses']);
-Route::get('/get_occurpations', [JobExperienceController::class, 'getOccurpations']);
+Route::get('/get_occupations', [JobExperienceController::class, 'getOccupations']);
 Route::post('/job_experience/store', [JobExperienceController::class, 'store']);
