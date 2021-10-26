@@ -1,45 +1,71 @@
 <template>
   <v-app>
-    <v-container>
-      <v-form
-        ref="form"
-        v-model="valid"
-        lazy-validation
-      >
-        <v-text-field
-          v-model="name"
-          :counter="10"
-          label="仕事タイトル"
-          required
-        ></v-text-field>
+    <v-container fluid>
+      <v-card text-align="center">
+        <v-row class="justify-center">
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+          >
+          <v-text-field
+            v-model="name"
+            label="仕事タイトル"
+            required
+          ></v-text-field>
+          </v-col>
+        </v-row>
 
-        <v-select
-          v-model="select"
-          :items="businesses"
-          item-text="name"
-          item-value="id"
-          :rules="[v => !!v || '必須です']"
-          label="職業"
-          required
-          return-object
-        ></v-select>
+        <v-row class="justify-center">
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+          >
+          <v-select
+            width="80%"
+            v-model="select"
+            :items="businesses"
+            item-text="name"
+            item-value="id"
+            :rules="[v => !!v || '必須です']"
+            solo
+            label="職業"
+            hint="職業"
+            persistent-hint
+            required
+            return-object
+          ></v-select>
+          <v-checkbox
+      v-model="checkbox"
+      :label="`Checkbox 1: ${checkbox.toString()}`"
+    ></v-checkbox>
+          </v-col>
+        </v-row>
 
-        <v-select
+        <v-row class="justify-center">
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+          >
+          <v-select
           v-model="select"
           :items="occupations"
           item-text="name"
           item-value="id"
           :rules="[v => !!v || '必須項目です']"
+          solo
           label="職種"
+          hint="職種"
+          persistent-hint
           required
         ></v-select>
-
-        <v-date-picker
-          v-model="date"
-          class="mt-4"
-          min="2016-06-15"
-          max="2018-03-20"
-        ></v-date-picker>
+        </v-col>
+        </v-row>
+        
+      </v-card>
+        
 
         <v-btn
           color="warning"
@@ -47,7 +73,6 @@
         >
           保存
         </v-btn>
-      </v-form>
       </v-container>
   </v-app>
 </template>

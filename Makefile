@@ -6,6 +6,8 @@ app:
 	docker-compose exec app bash
 restart:
 	docker-compose restart
+stop:
+	docker-compose stop
 first-install:
 	docker-compose exec app composer install
 	docker-compose exec app npm install

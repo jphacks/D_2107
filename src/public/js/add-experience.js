@@ -2119,6 +2119,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -38136,103 +38161,144 @@ var render = function() {
     [
       _c(
         "v-container",
+        { attrs: { fluid: "" } },
         [
           _c(
-            "v-form",
-            {
-              ref: "form",
-              attrs: { "lazy-validation": "" },
-              model: {
-                value: _vm.valid,
-                callback: function($$v) {
-                  _vm.valid = $$v
-                },
-                expression: "valid"
-              }
-            },
+            "v-card",
+            { attrs: { "text-align": "center" } },
             [
-              _c("v-text-field", {
-                attrs: { counter: 10, label: "仕事タイトル", required: "" },
-                model: {
-                  value: _vm.name,
-                  callback: function($$v) {
-                    _vm.name = $$v
-                  },
-                  expression: "name"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-select", {
-                attrs: {
-                  items: _vm.businesses,
-                  "item-text": "name",
-                  "item-value": "id",
-                  rules: [
-                    function(v) {
-                      return !!v || "必須です"
-                    }
-                  ],
-                  label: "職業",
-                  required: "",
-                  "return-object": ""
-                },
-                model: {
-                  value: _vm.select,
-                  callback: function($$v) {
-                    _vm.select = $$v
-                  },
-                  expression: "select"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-select", {
-                attrs: {
-                  items: _vm.occupations,
-                  "item-text": "name",
-                  "item-value": "id",
-                  rules: [
-                    function(v) {
-                      return !!v || "必須項目です"
-                    }
-                  ],
-                  label: "職種",
-                  required: ""
-                },
-                model: {
-                  value: _vm.select,
-                  callback: function($$v) {
-                    _vm.select = $$v
-                  },
-                  expression: "select"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-date-picker", {
-                staticClass: "mt-4",
-                attrs: { min: "2016-06-15", max: "2018-03-20" },
-                model: {
-                  value: _vm.date,
-                  callback: function($$v) {
-                    _vm.date = $$v
-                  },
-                  expression: "date"
-                }
-              }),
+              _c(
+                "v-row",
+                { staticClass: "justify-center" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
+                    [
+                      _c("v-text-field", {
+                        attrs: { label: "仕事タイトル", required: "" },
+                        model: {
+                          value: _vm.name,
+                          callback: function($$v) {
+                            _vm.name = $$v
+                          },
+                          expression: "name"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
-                "v-btn",
-                {
-                  attrs: { color: "warning" },
-                  on: {
-                    click: function($event) {
-                      return _vm.save()
-                    }
-                  }
-                },
-                [_vm._v("\n        保存\n      ")]
+                "v-row",
+                { staticClass: "justify-center" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          width: "80%",
+                          items: _vm.businesses,
+                          "item-text": "name",
+                          "item-value": "id",
+                          rules: [
+                            function(v) {
+                              return !!v || "必須です"
+                            }
+                          ],
+                          solo: "",
+                          label: "職業",
+                          hint: "職業",
+                          "persistent-hint": "",
+                          required: "",
+                          "return-object": ""
+                        },
+                        model: {
+                          value: _vm.select,
+                          callback: function($$v) {
+                            _vm.select = $$v
+                          },
+                          expression: "select"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-checkbox", {
+                        attrs: {
+                          label: "Checkbox 1: " + _vm.checkbox.toString()
+                        },
+                        model: {
+                          value: _vm.checkbox,
+                          callback: function($$v) {
+                            _vm.checkbox = $$v
+                          },
+                          expression: "checkbox"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "v-row",
+                { staticClass: "justify-center" },
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "d-flex", attrs: { cols: "12", sm: "6" } },
+                    [
+                      _c("v-select", {
+                        attrs: {
+                          items: _vm.occupations,
+                          "item-text": "name",
+                          "item-value": "id",
+                          rules: [
+                            function(v) {
+                              return !!v || "必須項目です"
+                            }
+                          ],
+                          solo: "",
+                          label: "職種",
+                          hint: "職種",
+                          "persistent-hint": "",
+                          required: ""
+                        },
+                        model: {
+                          value: _vm.select,
+                          callback: function($$v) {
+                            _vm.select = $$v
+                          },
+                          expression: "select"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "v-btn",
+            {
+              attrs: { color: "warning" },
+              on: {
+                click: function($event) {
+                  return _vm.save()
+                }
+              }
+            },
+            [_vm._v("\n        保存\n      ")]
           )
         ],
         1

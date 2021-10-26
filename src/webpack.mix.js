@@ -15,6 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/test.js', 'public/js')
     .js('resources/js/show-experience.js', 'public/js')
     .js('resources/js/add-experience.js', 'public/js')
+    .js('node_modules/popper.js/dist/popper.js', 'public/js')
     .vue()
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
