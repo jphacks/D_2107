@@ -1,5 +1,4 @@
 <template>
-  <v-app>
     <v-container fluid>
       <v-card text-align="center">
         <v-row class="justify-center">
@@ -9,7 +8,7 @@
             sm="6"
           >
           <v-text-field
-            v-model="name"
+            v-model="jobTitle"
             label="仕事タイトル"
             required
           ></v-text-field>
@@ -24,22 +23,17 @@
           >
           <v-select
             width="80%"
-            v-model="select"
+            v-model="selectBusiness"
             :items="businesses"
             item-text="name"
             item-value="id"
             :rules="[v => !!v || '必須です']"
             solo
             label="職業"
-            hint="職業"
-            persistent-hint
             required
             return-object
           ></v-select>
-          <v-checkbox
-      v-model="checkbox"
-      :label="`Checkbox 1: ${checkbox.toString()}`"
-    ></v-checkbox>
+
           </v-col>
         </v-row>
 
@@ -50,49 +44,119 @@
             sm="6"
           >
           <v-select
-          v-model="select"
+          v-model="selectOccupation"
           :items="occupations"
           item-text="name"
           item-value="id"
           :rules="[v => !!v || '必須項目です']"
           solo
           label="職種"
-          hint="職種"
-          persistent-hint
           required
+          return-object
         ></v-select>
         </v-col>
         </v-row>
+
+        <v-row class="justify-center">
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+          >
+          <v-menu
+            ref="menuStart"
+            v-model="menuStart"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="jobStartDate"
+                label="勤務開始日"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="jobStartDate"
+              :active-picker.sync="activePicker"
+              :max="(new Date(Date.now())).toISOString().substr(0, 10)"
+              min="1950-01-01"
+              @change="saveStartDate"
+            ></v-date-picker>
+        </v-menu>
+        </v-col>
+        </v-row>
         
+        <v-row class="justify-center">
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="6"
+          >
+          <v-menu
+            ref="menuEnd"
+            v-model="menuEnd"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="jobEndDate"
+                label="勤務終了日"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="jobEndDate"
+              :active-picker.sync="activePicker"
+              :max="(new Date(Date.now())).toISOString().substr(0, 10)"
+              min="1950-01-01"
+              @change="saveEndDate"
+            ></v-date-picker>
+        </v-menu>
+        </v-col>
+        </v-row>
+
+        <v-row class="justify-center">
+          <v-btn
+            color="warning"
+            @click="save()"
+            class="mb-5"
+          >
+            保存
+          </v-btn>
+        </v-row>
       </v-card>
         
-
-        <v-btn
-          color="warning"
-          @click="save()"
-        >
-          保存
-        </v-btn>
       </v-container>
-  </v-app>
 </template>
 
 <script>
   export default {
     data: () => ({
       valid: true,
-      name: '',
-      select: null,
-      items: [
-        'Item 1',
-        'Item 2',
-        'Item 3',
-        'Item 4',
-      ],
+      jobTitle: '',
+      selectBusiness: null,
+      selectOccupation: null,
       businesses: [],
       occupations: [],
       checkbox: false,
-      date: '2018-03-02',
+      activePicker: null,
+      date: null,
+      jobStartDate: null,
+      menuStart: false,
+      jobEndDate: null,
+      menuEnd: false,
     }),
 
     methods: {
@@ -107,28 +171,48 @@
       },
       save() {
         var __this = this
-            __this.processing = true
+        var data = {
+                  jobTitle: __this.jobTitle,
+                  businessId: __this.selectBusiness.id,
+                  ocuppationId: __this.selectOccupation.id,
+                  workStartDate: __this.jobStartDate,
+                  workEndDate: __this.jobEndDate
+                }
+                console.log(data)
+        
+            // __this.processing = true
             $.ajax({
                 type: 'POST',
                 url: SAVE_RESULT_URL,
                 dataType: 'json',
-                data: __this.answers,
+                data: {
+                  jobTitle: __this.jobTitle,
+                  businessId: __this.selectBusiness.id,
+                  ocuppationId: __this.selectOccupation.id,
+                  workStartDate: __this.workStartDate,
+                  workEndDate: __this.workEndDate
+                }
             })
                 .done(function(response){
                     //response は前回の診断の mapping_num
-                    console.log('saveing answers success')
-                    if (response.mapping_num >= 1) {
-                        console.log('2回目以降')
-                        window.location.href = NTH_RESULT_URL;
-                    } else {
-                        console.log('初回')
-                        window.location.href = GET_EVALUATIONS_URL;
-                    }
+                    // console.log('saveing answers success')
+                    // if (response.mapping_num >= 1) {
+                    //     console.log('2回目以降')
+                    //     window.location.href = NTH_RESULT_URL;
+                    // } else {
+                    //     console.log('初回')
+                    //     window.location.href = GET_EVALUATIONS_URL;
+                    // }
                 })
                 .fail(function(error){
                     console.log(console.log(error))
-                    __this.processing = false
                 })
+      },
+      saveStartDate (date) {
+        this.$refs.menuStart.save(date)
+      },
+      saveEndDate (date) {
+        this.$refs.menuEnd.save(date)
       }
     },
     created() {
@@ -173,6 +257,14 @@
                 .fail(function(error){
                     console.log(console.log(error))
                 })
-    }
+    },
+    watch: {
+      menuStart (val) {
+        val && setTimeout(() => (this.activePicker = 'YEAR'))
+      },
+      menuEnd (val) {
+        val && setTimeout(() => (this.activePicker = 'YEAR'))
+      },
+    },
   }
 </script>
