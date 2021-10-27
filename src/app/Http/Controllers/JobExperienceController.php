@@ -18,7 +18,7 @@ class JobExperienceController extends BaseController
 
     public function show() {
         $this->getOccupations();
-        return view('jobExperience.show');
+        return view('job_experience.show');
     }
 
     public function getAllExperiences(){
@@ -41,6 +41,7 @@ class JobExperienceController extends BaseController
     }
 
     public function store(Request $request){
+        dd($request->all());
         $jobExperience = new JobExperience();
         $jobExperience->executeFill($request->all());
 
@@ -49,6 +50,6 @@ class JobExperienceController extends BaseController
 
     public function create()
     {
-        return view('jobExperience.create');
+        return view('job_experience.create');
     }
 }
