@@ -32,11 +32,31 @@
         </v-container>
       </v-img>
     </v-card>
+
     <v-card-text class="py-0">
       <v-timeline
         align-top
         dense
       >
+        <div v-for="experience in experiences" :key="experience.id">
+          <v-timeline-item
+            color="pink"
+            small
+          >
+            <v-row class="pt-1">
+              <v-col cols="3">
+                <strong>{{experience.work_start_date}}</strong>
+              </v-col>
+              <v-col>
+                <strong>{{experience.title}}</strong>
+                <div class="text-caption">
+                  Mobile App
+                </div>
+              </v-col>
+            </v-row>
+          </v-timeline-item>
+        </div>
+
         <v-timeline-item
           color="pink"
           small
@@ -111,7 +131,7 @@
             <v-col>
               <strong>Finish Home Screen</strong>
               <div class="text-caption">
-                Web App
+                Web Appp
               </div>
             </v-col>
           </v-row>
@@ -128,6 +148,7 @@
       match: 'Foobar',
       max: 0,
       model: 'Foobar',
+      experiences: []
     }),
     created() {
       var __this = this
@@ -137,8 +158,8 @@
                 dataType: 'json',
             })
                 .done(function(response){
-                    //response は前回の診断の mapping_num
                     console.log(response)
+                    __this.experiences = response
                 })
                 .fail(function(error){
                     console.log(console.log(error))
