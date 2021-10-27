@@ -2516,13 +2516,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
       allowSpaces: false,
       match: 'Foobar',
       max: 0,
-      model: 'Foobar'
+      model: 'Foobar',
+      experiences: []
     };
   },
   created: function created() {
@@ -2533,8 +2554,8 @@ __webpack_require__.r(__webpack_exports__);
       url: 'api/get_all_experiences',
       dataType: 'json'
     }).done(function (response) {
-      //response は前回の診断の mapping_num
       console.log(response);
+      __this.experiences = response;
     }).fail(function (error) {
       console.log(console.log(error));
     });
@@ -39345,6 +39366,45 @@ var render = function() {
             "v-timeline",
             { attrs: { "align-top": "", dense: "" } },
             [
+              _vm._l(_vm.experiences, function(experience) {
+                return _c(
+                  "div",
+                  { key: experience.id },
+                  [
+                    _c(
+                      "v-timeline-item",
+                      { attrs: { color: "pink", small: "" } },
+                      [
+                        _c(
+                          "v-row",
+                          { staticClass: "pt-1" },
+                          [
+                            _c("v-col", { attrs: { cols: "3" } }, [
+                              _c("strong", [
+                                _vm._v(_vm._s(experience.work_start_date))
+                              ])
+                            ]),
+                            _vm._v(" "),
+                            _c("v-col", [
+                              _c("strong", [_vm._v(_vm._s(experience.title))]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "text-caption" }, [
+                                _vm._v(
+                                  "\n                Mobile App\n              "
+                                )
+                              ])
+                            ])
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              }),
+              _vm._v(" "),
               _c(
                 "v-timeline-item",
                 { attrs: { color: "pink", small: "" } },
@@ -39476,7 +39536,7 @@ var render = function() {
                         _c("strong", [_vm._v("Finish Home Screen")]),
                         _vm._v(" "),
                         _c("div", { staticClass: "text-caption" }, [
-                          _vm._v("\n              Web App\n            ")
+                          _vm._v("\n              Web Appp\n            ")
                         ])
                       ])
                     ],
@@ -39486,7 +39546,7 @@ var render = function() {
                 1
               )
             ],
-            1
+            2
           )
         ],
         1
