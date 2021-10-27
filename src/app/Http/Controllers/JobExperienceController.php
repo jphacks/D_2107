@@ -10,6 +10,7 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Support\Facades\Log;
 
 class JobExperienceController extends BaseController
 {
@@ -21,8 +22,11 @@ class JobExperienceController extends BaseController
     }
 
     public function getAllExperiences(){
+        Log::info("来たよ");
         $userId = \Auth::id();
-        $jobExperience = JobExperience::where('user_id', $userId)->get()->toArray();
+        $jobExperience = JobExperience::where('user_id', 3)->get()->toArray();
+        Log::info($userId);
+        Log::info($jobExperience);
         return response()->json($jobExperience);
     }
 

@@ -21,16 +21,18 @@ use App\Http\Controllers\JobExperienceController;
 // Route::get('/JobExperience', function () {
 //     return view('welcome');
 // });
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::get('/', function () {return view('index');});
+Auth::routes();
 
 Route::group(['middleware' => 'auth:web'], function () {
-    Route::get('/', function () { return view('welcome'); });
+    // Route::get('/', function () { return view('welcome'); });
 
     Route::group(['prefix'=>'job-experience', 'as'=>'jobExperience.'], function () {
         Route::get('/create', [JobExperienceController::class, 'create'])->name('create');
         Route::get('/show', [JobExperienceController::class, 'show'])->name('show');
     });
 });
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
