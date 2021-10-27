@@ -2285,7 +2285,7 @@ __webpack_require__.r(__webpack_exports__);
 
       $.ajax({
         type: 'POST',
-        url: SAVE_RESULT_URL,
+        url: "http://localhost:8120" + '/api/job_experience/store',
         dataType: 'json',
         data: {
           jobTitle: __this.jobTitle,
@@ -2294,15 +2294,8 @@ __webpack_require__.r(__webpack_exports__);
           workStartDate: __this.workStartDate,
           workEndDate: __this.workEndDate
         }
-      }).done(function (response) {//response は前回の診断の mapping_num
-        // console.log('saveing answers success')
-        // if (response.mapping_num >= 1) {
-        //     console.log('2回目以降')
-        //     window.location.href = NTH_RESULT_URL;
-        // } else {
-        //     console.log('初回')
-        //     window.location.href = GET_EVALUATIONS_URL;
-        // }
+      }).done(function (response) {
+        console.log('success');
       }).fail(function (error) {
         console.log(console.log(error));
       });
@@ -2319,7 +2312,7 @@ __webpack_require__.r(__webpack_exports__);
 
     $.ajax({
       type: 'GET',
-      url: "http://localhost:8120/" + 'api/get_businesses',
+      url: "http://localhost:8120" + '/api/get_businesses',
       dataType: 'json'
     }).done(function (response) {
       //response は前回の診断の mapping_num
@@ -2341,7 +2334,7 @@ __webpack_require__.r(__webpack_exports__);
     });
     $.ajax({
       type: 'GET',
-      url: "http://localhost:8120/" + 'api/get_occupations',
+      url: "http://localhost:8120" + '/api/get_occupations',
       dataType: 'json'
     }).done(function (response) {
       //response は前回の診断の mapping_num

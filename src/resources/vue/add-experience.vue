@@ -183,7 +183,7 @@
             // __this.processing = true
             $.ajax({
                 type: 'POST',
-                url: SAVE_RESULT_URL,
+                url: process.env.MIX_APP_APP_URL + '/api/job_experience/store',
                 dataType: 'json',
                 data: {
                   jobTitle: __this.jobTitle,
@@ -194,15 +194,7 @@
                 }
             })
                 .done(function(response){
-                    //response は前回の診断の mapping_num
-                    // console.log('saveing answers success')
-                    // if (response.mapping_num >= 1) {
-                    //     console.log('2回目以降')
-                    //     window.location.href = NTH_RESULT_URL;
-                    // } else {
-                    //     console.log('初回')
-                    //     window.location.href = GET_EVALUATIONS_URL;
-                    // }
+                  console.log('success')
                 })
                 .fail(function(error){
                     console.log(console.log(error))
@@ -219,7 +211,7 @@
       var __this = this
             $.ajax({
                 type: 'GET',
-                url: "http://localhost:8120/" + 'api/get_businesses',
+                url: process.env.MIX_APP_APP_URL + '/api/get_businesses',
                 dataType: 'json',
             })
                 .done(function(response){
@@ -239,7 +231,7 @@
                 })
             $.ajax({
                 type: 'GET',
-                url: "http://localhost:8120/" + 'api/get_occupations',
+                url: process.env.MIX_APP_APP_URL + '/api/get_occupations',
                 dataType: 'json',
             })
                 .done(function(response){
