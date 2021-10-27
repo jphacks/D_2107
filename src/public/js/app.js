@@ -2272,22 +2272,15 @@ __webpack_require__.r(__webpack_exports__);
       this.$refs.form.resetValidation();
     },
     save: function save() {
-      var __this = this;
+      var __this = this; // __this.processing = true
 
-      var data = {
-        jobTitle: __this.jobTitle,
-        businessId: __this.selectBusiness.id,
-        ocuppationId: __this.selectOccupation.id,
-        workStartDate: __this.jobStartDate,
-        workEndDate: __this.jobEndDate
-      };
-      console.log(data); // __this.processing = true
 
       $.ajax({
         type: 'POST',
         url: "http://localhost:8120" + '/api/job_experience/store',
         dataType: 'json',
         data: {
+          userId: this.$userId,
           jobTitle: __this.jobTitle,
           businessId: __this.selectBusiness.id,
           ocuppationId: __this.selectOccupation.id,
@@ -2709,6 +2702,7 @@ Vue.component('example-component', __webpack_require__(/*! ./components/ExampleC
 Vue.component('index-component', __webpack_require__(/*! ../vue/index.vue */ "./resources/vue/index.vue")["default"]);
 Vue.component('test-component', __webpack_require__(/*! ../vue/test.vue */ "./resources/vue/test.vue")["default"]);
 Vue.component('add-experience', __webpack_require__(/*! ../vue/add-experience.vue */ "./resources/vue/add-experience.vue")["default"]);
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
 
 
 Vue.use((vuetify__WEBPACK_IMPORTED_MODULE_1___default()));

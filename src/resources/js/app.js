@@ -24,6 +24,8 @@ Vue.component('index-component', require('../vue/index.vue').default);
 Vue.component('test-component', require('../vue/test.vue').default);
 Vue.component('add-experience', require('../vue/add-experience.vue').default);
 
+Vue.prototype.$userId = document.querySelector("meta[name='user-id']").getAttribute('content');
+
 import Vuetify from 'vuetify';
 import 'vuetify/dist/vuetify.min.css';
 Vue.use(Vuetify);

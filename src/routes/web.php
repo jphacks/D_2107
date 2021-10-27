@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobExperienceController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\JobExperienceController;
 // Route::get('/JobExperience', function () {
 //     return view('welcome');
 // });
-Route::get('/', function () {return view('index');});
+Route::get('/', [HomeController::class, 'index'])->name('index');
 Auth::routes();
 
 Route::group(['middleware' => 'auth:web'], function () {
@@ -35,4 +36,4 @@ Route::group(['middleware' => 'auth:web'], function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

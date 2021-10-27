@@ -171,14 +171,6 @@
       },
       save() {
         var __this = this
-        var data = {
-                  jobTitle: __this.jobTitle,
-                  businessId: __this.selectBusiness.id,
-                  ocuppationId: __this.selectOccupation.id,
-                  workStartDate: __this.jobStartDate,
-                  workEndDate: __this.jobEndDate
-                }
-                console.log(data)
         
             // __this.processing = true
             $.ajax({
@@ -186,6 +178,7 @@
                 url: process.env.MIX_APP_APP_URL + '/api/job_experience/store',
                 dataType: 'json',
                 data: {
+                  userId: this.$userId,
                   jobTitle: __this.jobTitle,
                   businessId: __this.selectBusiness.id,
                   ocuppationId: __this.selectOccupation.id,
