@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\JobExperience\CreateRequest;
 use App\Models\JobExperience;
 use App\Models\MasterBusiness;
 use App\Models\MasterOccupation;
@@ -12,8 +11,8 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Http\Requests\AnyRequest;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 
 
 class JobExperienceController extends BaseController
@@ -30,7 +29,7 @@ class JobExperienceController extends BaseController
         ]);
     }
 
-    public function store(CreateRequest $request){
+    public function store(Request $request){
         Log::info("hello from store");
         $params = [
             "title" => (string) $request['jobTitle'],
