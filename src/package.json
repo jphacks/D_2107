@@ -10,9 +10,22 @@
         "watch-poll": "mix watch -- --watch-options-poll=1000"
     },
     "dependencies": {
+        "@coding-wisely/vue-tailwind-datepicker": "^1.1.5",
+        "@headlessui/vue": "^1.4.1",
+        "@heroicons/vue": "^1.0.5",
         "@inertiajs/inertia-vue": "^0.7.2",
+        "@popperjs/core": "^2.10.2",
+        "@themesberg/tailwind-datepicker": "^1.0.1",
         "bootstrap-vue": "^2.21.2",
+        "daisyui": "^1.16.0",
+        "dayjs": "^1.10.7",
+        "litepie-datepicker": "^1.0.14",
+        "v-calendar": "^3.0.0-alpha.6",
+        "vue-ctk-date-time-picker": "^2.5.0",
         "vue-router": "^3.5.3",
+        "vue-select": "^3.16.0",
+        "vue-tailwind": "^2.5.0",
+        "vue-tailwind-picker": "^2.0.0",
         "vuetify": "^2.5.10"
     },
     "devDependencies": {

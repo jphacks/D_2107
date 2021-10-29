@@ -20,6 +20,10 @@ class JobExperienceController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function getAllExperiences() {
+        return JobExperience::find('user_id', \Auth::id());
+    }
+
     public function show() {
         return Inertia::render('show-experience', [
             'allOccupations' => MasterOccupation::all()->pluck('name', 'id')
@@ -27,17 +31,19 @@ class JobExperienceController extends BaseController
     }
 
     public function store(CreateRequest $request){
+        Log::info("hello from store");
         $params = [
-            "title" => $request['jobTitle'],
-            "user_id" => $request['userId'],
-            "master_occupation_id" => $request['ocuppationId'],
-            "master_business_id" => $request['businessId'],
+            "title" => (string) $request['jobTitle'],
+            "user_id" => (int) $request['userId'],
+            "master_occupation_id" => (int) $request['ocuppationId'],
+            "master_business_id" => (int) $request['businessId'],
             "work_end_date" => $request['workEndDate'],
             "work_start_date" => $request['workStartDate'],
         ];
 
         $jobExperience = new JobExperience();
         $jobExperience->fill($params);
+        Log::info($jobExperience);
         $jobExperience->save();
 
         return response()->json(['message' => '更新完了']);
@@ -71,6 +77,7 @@ class JobExperienceController extends BaseController
     public function create()
     {
         return Inertia::render('AddExperience', [
+            'userId' => \Auth::id(),
             'allBusinesses' =>  MasterBusiness::all()->pluck('name', 'id'),
             'allOccupations' => MasterOccupation::all()->pluck('name', 'id')
         ]);
