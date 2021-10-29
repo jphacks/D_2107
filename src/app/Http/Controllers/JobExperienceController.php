@@ -12,6 +12,7 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Http\Requests\AnyRequest;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Request;
 use Inertia\Inertia;
 
 
@@ -36,6 +37,31 @@ class JobExperienceController extends BaseController
         ];
 
         $jobExperience = new JobExperience();
+        $jobExperience->fill($params);
+        $jobExperience->save();
+
+        return response()->json(['message' => '更新完了']);
+    }
+
+    public function edit($id){
+        $jobExperience = JobExperience::find($id);
+        return Inertia::render('変えてね', [
+            'allLicenses' => JobExperience::all()->pluck('name', 'id'),
+            'jobExperience' => $jobExperience,
+        ]);
+    }
+
+    public function update($id, Request $request){
+        $params = [
+            "title" => $request['jobTitle'],
+            "user_id" => $request['userId'],
+            "master_occupation_id" => $request['ocuppationId'],
+            "master_business_id" => $request['businessId'],
+            "work_end_date" => $request['workEndDate'],
+            "work_start_date" => $request['workStartDate'],
+        ];
+
+        $jobExperience = JobExperience::find($id);
         $jobExperience->fill($params);
         $jobExperience->save();
 
