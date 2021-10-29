@@ -8,9 +8,11 @@ use App\Models\MasterOccupation;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
-use Illuminate\Http\Request;
+use App\Http\Requests\AnyRequest;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
+use Inertia\Inertia;
+
 
 class JobExperienceController extends BaseController
 {
@@ -19,15 +21,6 @@ class JobExperienceController extends BaseController
     public function show() {
         $this->getOccupations();
         return view('job_experience.show');
-    }
-
-    public function getAllExperiences(){
-        Log::info("来たよ");
-        $userId = \Auth::id();
-        $jobExperience = JobExperience::where('user_id', 3)->get()->toArray();
-        Log::info($userId);
-        Log::info($jobExperience);
-        return response()->json($jobExperience);
     }
 
     public function getBusinesses(){
@@ -50,6 +43,9 @@ class JobExperienceController extends BaseController
 
     public function create()
     {
-        return view('job_experience.create');
+        return Inertia::render('AddExperience', [
+            'allBusinesses' =>  MasterBusiness::all()->pluck('name', 'id'),
+            'allOccupations' => MasterOccupation::all()->pluck('name', 'id')
+        ]);
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\JobExperience;
+use Inertia\Inertia;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
     }
 
     /**
@@ -23,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('index');
+        return Inertia::render('Index', ['experiences' => JobExperience::where('user_id', \Auth::id())->get()->toArray()]);
     }
 
     /**
