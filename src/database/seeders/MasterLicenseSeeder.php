@@ -8,9 +8,9 @@ class MasterLicenseSeeder extends Seeder
 {
     public $names = [
         1 => 'AT限定運転免許',
-        2 => '数検1級',
-        3 => '英検1級',
-        4 => 'TOEIC900点',
+        2 => '数検',
+        3 => '英検',
+        4 => 'TOEIC',
         5 => '宅地建物取引士',
     ];
     

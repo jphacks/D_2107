@@ -33,7 +33,6 @@ class UserLicenseController extends BaseController
             'user_id' => $request['user_id'],
             'master_license_id' => $request['master_license_id'],
             'received_date' => $request['received_date'],
-            'work_end_date' => $request['work_end_date'],
         ];
 
         $userLincense = new UserLincense();
