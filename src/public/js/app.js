@@ -23032,6 +23032,14 @@ __webpack_require__.r(__webpack_exports__);
         return _this2.activePicker = 'YEAR';
       });
     }
+  },
+  created: function created() {
+    axios.get('/user').then(function (response) {
+      console.log('hello');
+      console.log(response);
+    })["catch"](function (error) {
+      console.log(console.log(error));
+    });
   }
 });
 

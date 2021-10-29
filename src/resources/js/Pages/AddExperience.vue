@@ -125,5 +125,15 @@
         val && setTimeout(() => (this.activePicker = 'YEAR'))
       },
     },
+    created() {
+      axios.get('/user')
+                .then(function(response){
+                  console.log('hello')
+                    console.log(response)
+                })
+                .catch(function(error){
+                    console.log(console.log(error))
+                })
+    }
   }
 </script>
