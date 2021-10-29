@@ -68,8 +68,9 @@ class UserLicenseController extends BaseController
 
     public function create()
     {
-        return Inertia::render('変えてね', [
+        return Inertia::render('AddLicense', [
             'allLicenses' =>  MasterLicense::all()->pluck('name', 'id'),
+            'userId' => \Auth::id()
         ]);
     }
 }

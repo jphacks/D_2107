@@ -2,10 +2,9 @@
   <app-layout title="add">
     <template #header>
       <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        経験の追加
+        資格の追加
       </h2>
     </template>
-    <t-input value="hello"></t-input>
     <section class="h-screen bg-gray-100 bg-opacity-50 mt-8">
       <div class="container max-w-2xl mx-auto shadow-md md:w-3/4">
         <div
@@ -28,39 +27,8 @@
               md:inline-flex md:space-y-0
             "
           >
-            <h2 class="max-w-sm mx-auto md:w-1/3">仕事タイトル</h2>
-            <Datepicker v-model="jobStartDate" ></Datepicker>
-            <div class="max-w-sm mx-auto md:w-2/3">
-              <div class="relative">
-                <input
-                  type="text"
-                  id="user-info-email"
-                  v-model="jobTitle"
-                  class="
-                    rounded-lg
-                    border-transparent
-                    flex-1
-                    appearance-none
-                    border border-gray-300
-                    w-full
-                    py-2
-                    px-4
-                    bg-white
-                    text-gray-700
-                    placeholder-gray-400
-                    shadow-sm
-                    text-base
-                    focus:outline-none
-                    focus:ring-2
-                    focus:ring-purple-600
-                    focus:border-transparent
-                  "
-                  placeholder="仕事タイトル"
-                />
-              </div>
-            </div>
+            
           </div>
-          <hr />
           <div
             class="
               items-center
@@ -112,9 +80,10 @@
               </div>
               <div>
                 <div class="relative">
-                  <label for="occupation">職種を選択してください</label>
-                  <select
+                  <label for="occupation">スコアや級などがあれば記入してください</label>
+                  <input
                     v-model="selectOccupation"
+                    type="text"
                     id="occupation"
                     class="
                       rounded-lg
@@ -136,84 +105,8 @@
                       focus:border-transparent
                     "
                     required
+                    placeholder="900点、1級 など"
                   >
-                    <option
-                      v-for="(occupation, key) in allOccupations"
-                      :key="key"
-                      :value="key"
-                    >
-                      {{ occupation }}
-                    </option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <hr />
-          <div
-            class="
-              items-center
-              w-full
-              p-4
-              space-y-4
-              text-gray-500
-              md:inline-flex md:space-y-0
-            "
-          >
-            <h2 class="max-w-sm mx-auto md:w-1/3">期間</h2>
-            <div class="max-w-sm mx-auto space-y-5 md:w-2/3">
-              <div>
-                <div class="relative">
-                  <input
-                    type="datetime"
-                    class="
-                      rounded-lg
-                      border-transparent
-                      flex-1
-                      appearance-none
-                      border border-gray-300
-                      w-full
-                      py-2
-                      px-4
-                      bg-white
-                      text-gray-700
-                      placeholder-gray-400
-                      shadow-sm
-                      text-base
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-purple-600
-                      focus:border-transparent
-                    "
-                  />
-                </div>
-              </div>
-              <div>
-                <div class="relative">
-                  <input
-                    type="text"
-                    id="user-info-phone"
-                    class="
-                      rounded-lg
-                      border-transparent
-                      flex-1
-                      appearance-none
-                      border border-gray-300
-                      w-full
-                      py-2
-                      px-4
-                      bg-white
-                      text-gray-700
-                      placeholder-gray-400
-                      shadow-sm
-                      text-base
-                      focus:outline-none
-                      focus:ring-2
-                      focus:ring-purple-600
-                      focus:border-transparent
-                    "
-                    placeholder="終了日"
-                  />
                 </div>
               </div>
             </div>
@@ -262,8 +155,6 @@ import {
 } from "@headlessui/vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
 import { ref } from 'vue';
-    import Datepicker from 'vue3-date-time-picker';
-    import 'vue3-date-time-picker/dist/main.css'
 
 
 export default defineComponent({
@@ -274,7 +165,6 @@ export default defineComponent({
     ListboxLabel,
     ListboxOption,
     ListboxOptions,
-    Datepicker
     
   },
   setup() {
@@ -286,21 +176,10 @@ export default defineComponent({
         },
   props: {
     userId: 0,
-    allBusinesses: {},
-    allOccupations: {},
+    allLicenses: {},
   },
   data: () => ({
-    valid: true,
-    jobTitle: "",
-    selectBusiness: null,
-    selectOccupation: null,
-    checkbox: false,
-    activePicker: null,
-    date: null,
-    jobStartDate: null,
-    menuStart: false,
-    jobEndDate: null,
-    menuEnd: false,
+
   }),
 
   methods: {
@@ -316,13 +195,10 @@ export default defineComponent({
     save() {
       console.log('hello')
       axios
-        .post("/job_experience/store", {
+        .post("/user-license/store", {
           userId: this.userId,
-          jobTitle: this.jobTitle,
-          businessId: this.selectBusiness,
-          ocuppationId: this.selectOccupation,
-          workStartDate: "2021-08-16",
-          workEndDate: "2021-09-16",
+          master_license_id: this.jobTitle,
+          received_date: "2021-08-16"
         })
         .then(function (responce) {
           console.log(responce);

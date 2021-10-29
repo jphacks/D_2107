@@ -3,6 +3,8 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { createInertiaApp } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
+import Datepicker from 'vue3-date-time-picker';
+import 'vue3-date-time-picker/dist/main.css'
 import { vuetify } from 'vuetify';
 // dayjsのインポート
 import dayjs from 'dayjs';
@@ -10,6 +12,7 @@ import dayjs from 'dayjs';
 import 'dayjs/locale/ja';
 // ロケール設定
 dayjs.locale('ja')
+
 
 
 
@@ -21,6 +24,7 @@ createInertiaApp({
     setup({ el, app, props, plugin }) {
         return createApp({render: () => h(app, props) })
             .use(plugin)
+            .component('Datepicker', Datepicker)
             .provide('dayjs', dayjs)
             .mixin({ methods: { route } })
             .mount(el);

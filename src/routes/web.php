@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use App\Http\Controllers\JobExperienceController;
+use App\Http\Controllers\UserLicenseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,6 +40,11 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::get('/get_businesses', [JobExperienceController::class, 'getBusinesses']);
     Route::get('/get_occupations', [JobExperienceController::class, 'getOccupations']);
     Route::post('/job_experience/store', [JobExperienceController::class, 'store']);
+
+    Route::prefix('user-license')->group(function () {
+        Route::get('/create', [UserLicenseController::class, 'create'])->name('create');
+        Route::post('/store', [JobExperienceController::class, 'store']);
+    });
 
     Route::get('/user', function (Request $request) {
         Log::info("rikuesutoo");

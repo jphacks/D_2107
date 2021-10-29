@@ -45,6 +45,9 @@
             <span class="px-4 py-2 mx-4 w-16 text-base rounded-full text-white-500 border border-white-500 undefined ">
                 資格
             </span>
+            <a href="user-license/create" class="button px-4 py-2 mx-4 w-16 text-base rounded-full text-white-500 border border-white-500 undefined ">
+                ＋
+            </a>
           </div>
         </div>
       </div>
