@@ -178,12 +178,12 @@
                 url: process.env.MIX_APP_APP_URL + '/api/job_experience/store',
                 dataType: 'json',
                 data: {
-                  userId: this.$userId,
+                  userId: __this.userId,
                   jobTitle: __this.jobTitle,
                   businessId: __this.selectBusiness.id,
                   ocuppationId: __this.selectOccupation.id,
-                  workStartDate: __this.workStartDate,
-                  workEndDate: __this.workEndDate
+                  workStartDate: __this.jobStartDate,
+                  workEndDate: __this.jobEndDate
                 }
             })
                 .done(function(response){
