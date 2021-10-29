@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\JobExperience\CreateRequest;
 use App\Models\JobExperience;
 use App\Models\MasterBusiness;
 use App\Models\MasterOccupation;
@@ -22,23 +23,22 @@ class JobExperienceController extends BaseController
         $this->getOccupations();
         return view('job_experience.show');
     }
+    public function store(CreateRequest $request){
+        $params = [
+            "title" => $request['jobTitle'],
+            "user_id" => 2,
+            "master_occupation_id" => $request['ocuppationId'],
+            "master_business_id" => $request['businessId'],
+            "work_end_date" => $request['workEndDate'],
+            "work_start_date" => $request['workStartDate'],
+        ];
 
-    public function getBusinesses(){
-        $businesses = MasterBusiness::all()->pluck('name', 'id');
-        return response()->json($businesses);
-    }
-
-    public function getOccupations(){
-        $occupations = MasterOccupation::all()->pluck('name', 'id');
-        return response()->json($occupations);
-    }
-
-    public function store(Request $request){
-        dd($request->all());
         $jobExperience = new JobExperience();
-        $jobExperience->executeFill($request->all());
+        $jobExperience->fill($params);
 
         $jobExperience->save();
+
+        return response()->json(['message' => '更新完了']);
     }
 
     public function create()
