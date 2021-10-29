@@ -20,13 +20,15 @@ class JobExperienceController extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     public function show() {
-        $this->getOccupations();
-        return view('job_experience.show');
+        return Inertia::render('show-experience', [
+            'allOccupations' => MasterOccupation::all()->pluck('name', 'id')
+        ]);
     }
+
     public function store(CreateRequest $request){
         $params = [
             "title" => $request['jobTitle'],
-            "user_id" => 2,
+            "user_id" => $request['userId'],
             "master_occupation_id" => $request['ocuppationId'],
             "master_business_id" => $request['businessId'],
             "work_end_date" => $request['workEndDate'],
@@ -35,7 +37,6 @@ class JobExperienceController extends BaseController
 
         $jobExperience = new JobExperience();
         $jobExperience->fill($params);
-
         $jobExperience->save();
 
         return response()->json(['message' => '更新完了']);
