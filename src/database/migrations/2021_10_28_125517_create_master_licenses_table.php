@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSecretsTable extends Migration
+class CreateMasterLicensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateSecretsTable extends Migration
      */
     public function up()
     {
-        Schema::create('secrets', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('user_id')->unsigned();
-            $table->text('secret');
+        Schema::create('master_licenses', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -30,6 +27,6 @@ class CreateSecretsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('secrets');
+        Schema::dropIfExists('master_licenses');
     }
 }

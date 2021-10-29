@@ -15,5 +15,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(MasterBusinessSeeder::class);
         $this->call(MasterOccupationSeeder::class);
+        $this->call(MasterLicenseSeeder::class);
     }
 }
