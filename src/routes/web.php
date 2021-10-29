@@ -1,8 +1,9 @@
 <?php
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use Inertia\Inertia;
 use App\Http\Controllers\JobExperienceController;
-use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,25 +16,23 @@ use App\Http\Controllers\HomeController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 
-// Route::get('/JobExperience', function () {
-//     return view('welcome');
-// });
-Route::get('/', [HomeController::class, 'index'])->name('index');
-Auth::routes();
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return Inertia::render('Dashboard');
+})->name('dashboard');
 
-Route::group(['middleware' => 'auth:web'], function () {
-    // Route::get('/', function () { return view('welcome'); });
-
-    Route::group(['prefix'=>'job-experience', 'as'=>'jobExperience.'], function () {
+Route::middleware('auth:sanctum', 'verified')->group(function () {
+    Route::get('/index', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+    Route::prefix('job-experience')->group(function () {
         Route::get('/create', [JobExperienceController::class, 'create'])->name('create');
         Route::get('/show', [JobExperienceController::class, 'show'])->name('show');
     });
 });
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'home'])->name('home');

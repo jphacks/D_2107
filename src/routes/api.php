@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobExperienceController;
+use App\Http\Controllers\SecretController;
+use App\Http\Controllers\LoginController;
+use Illuminate\Support\Facades\Log;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,8 +19,13 @@ use App\Http\Controllers\JobExperienceController;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+    Log::info("rikuesuto");
+    Log::info($request);
     return $request->user();
 });
+
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout']);
 
 Route::get('/get_all_experiences', [JobExperienceController::class, 'getAllExperiences']);
 Route::get('/get_businesses', [JobExperienceController::class, 'getBusinesses']);
