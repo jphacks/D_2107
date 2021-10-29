@@ -95,28 +95,20 @@
         this.$refs.form.resetValidation()
       },
       save() {
-        
-            // __this.processing = true
-            console.log('hello')
-            $.ajax({
-                type: 'POST',
-                url: process.env.MIX_APP_APP_URL + '/api/job_experience/store',
-                dataType: 'json',
-                data: {
-                  userId: 1,
-                  jobTitle: 'aa',
-                  businessId: 1,
-                  ocuppationId: 1,
-                  workStartDate: '2021-08-16',
-                  workEndDate: '2021-09-16'
-                }
-            })
-                .done(function(response){
-                  console.log('success')
-                })
-                .fail(function(error){
-                    console.log(console.log(error))
-                })
+        axios.post('/api/job_experience/store', {
+          userId: 1,
+          jobTitle: 'aa',
+          businessId: 1,
+          ocuppationId: 1,
+          workStartDate: '2021-08-16',
+          workEndDate: '2021-09-16'
+        }).then(function (responce){
+          console.log(responce)
+          console.log('success')
+        }).catch(function(error){
+              console.log(console.log(error))
+          })
+            
       },
       saveStartDate (date) {
         this.$refs.menuStart.save(date)
