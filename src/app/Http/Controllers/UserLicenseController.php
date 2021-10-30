@@ -32,6 +32,7 @@ class UserLicenseController extends BaseController
         $params = [
             'user_id' => $request['user_id'],
             'master_license_id' => $request['master_license_id'],
+            'note' => $request['note'],
             'received_date' => $request['received_date'],
         ];
 

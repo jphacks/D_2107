@@ -43,9 +43,9 @@
             <div class="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div>
                 <div class="relative">
-                  <label for="business">業界を選択してください</label>
+                  <label for="business">資格を選択してください</label>
                   <select
-                    v-model="selectBusiness"
+                    v-model="selectLicense"
                     id="business"
                     class="
                       rounded-lg
@@ -69,11 +69,11 @@
                     required
                   >
                     <option
-                      v-for="(business, key) in allBusinesses"
+                      v-for="(license, key) in allLicenses"
                       :key="key"
                       :value="key"
                     >
-                      {{ business }}
+                      {{ license }}
                     </option>
                   </select>
                 </div>
@@ -82,7 +82,7 @@
                 <div class="relative">
                   <label for="occupation">スコアや級などがあれば記入してください</label>
                   <input
-                    v-model="selectOccupation"
+                    v-model="licenseText"
                     type="text"
                     id="occupation"
                     class="
@@ -179,7 +179,8 @@ export default defineComponent({
     allLicenses: {},
   },
   data: () => ({
-
+    selectLicense: null,
+    licenseText: ""
   }),
 
   methods: {
@@ -197,7 +198,8 @@ export default defineComponent({
       axios
         .post("/user-license/store", {
           userId: this.userId,
-          master_license_id: this.jobTitle,
+          master_license_id: this.selectLicense,
+          note: this.licenseText,
           received_date: "2021-08-16"
         })
         .then(function (responce) {

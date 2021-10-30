@@ -327,6 +327,7 @@ export default defineComponent({
         .then(function (responce) {
           console.log(responce);
           console.log("success");
+          window.location.href='/index'
         })
         .catch(function (error) {
           console.log(console.log(error));
