@@ -1,10 +1,5 @@
 <template>
   <app-layout title="add">
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        経験の追加
-      </h2>
-    </template>
     <t-input value="hello"></t-input>
     <section class="h-screen bg-gray-100 bg-opacity-50 mt-8">
       <div class="container max-w-2xl mx-auto shadow-md md:w-3/4">
@@ -29,7 +24,6 @@
             "
           >
             <h2 class="max-w-sm mx-auto md:w-1/3">仕事タイトル</h2>
-            <Datepicker v-model="jobStartDate" ></Datepicker>
             <div class="max-w-sm mx-auto md:w-2/3">
               <div class="relative">
                 <input
@@ -166,6 +160,7 @@
                 <div class="relative">
                   <input
                     type="datetime"
+                    v-model="jobStartDate"
                     class="
                       rounded-lg
                       border-transparent
@@ -185,6 +180,7 @@
                       focus:ring-purple-600
                       focus:border-transparent
                     "
+                    placeholder="開始日"
                   />
                 </div>
               </div>
@@ -193,6 +189,7 @@
                   <input
                     type="text"
                     id="user-info-phone"
+                    v-model="jobEndDate"
                     class="
                       rounded-lg
                       border-transparent
@@ -242,7 +239,7 @@
                 rounded-lg
               "
             >
-              Save
+              追加
             </button>
           </div>
         </div>
@@ -261,9 +258,6 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref } from 'vue';
-    import Datepicker from 'vue3-date-time-picker';
-    import 'vue3-date-time-picker/dist/main.css'
 
 
 export default defineComponent({
@@ -274,16 +268,8 @@ export default defineComponent({
     ListboxLabel,
     ListboxOption,
     ListboxOptions,
-    Datepicker
     
   },
-  setup() {
-            const date = ref();
-            
-            return {
-                date
-            }
-        },
   props: {
     userId: 0,
     allBusinesses: {},
@@ -321,8 +307,8 @@ export default defineComponent({
           jobTitle: this.jobTitle,
           businessId: this.selectBusiness,
           ocuppationId: this.selectOccupation,
-          workStartDate: "2021-08-16",
-          workEndDate: "2021-09-16",
+          workStartDate: this.jobStartDate,
+          workEndDate: this.jobEndDate,
         })
         .then(function (responce) {
           console.log(responce);

@@ -108,9 +108,11 @@
             </div>
             <div class="flex-grow sm:pl-6 mt-6 sm:mt-0">
               <h2 class="font-medium title-font text-gray-900 mb-1 text-xl">
-                {{ experience.work_start_date }}
+                {{ experience.title }}
               </h2>
-              <p class="leading-relaxed">{{ experience.title }}</p>
+              <p>業界： {{experience.business.name}}</p>
+              <p>職種： {{experience.occupation.name}}</p>
+              <p class="leading-relaxed">{{ experience.work_start_date }}</p>
             </div>
           </div>
         </a>

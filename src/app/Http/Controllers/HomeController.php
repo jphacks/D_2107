@@ -27,7 +27,7 @@ class HomeController extends Controller
     {
         return Inertia::render('Index', [
             'userInfo' => \Auth::user(),
-            'experiences' => JobExperience::where('user_id', \Auth::id())->get()->toArray(),
+            'experiences' => JobExperience::where('user_id', \Auth::id())->with(['business', 'occupation'])->get()->toArray(),
             'userLicenses' => UserLicense::where('user_id', \Auth::id())->with(['license'])->get()->toArray(),
         ]);
     }
