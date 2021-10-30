@@ -37,18 +37,19 @@ class UserLicenseController extends BaseController
             'received_date' => $request['received_date'],
         ];
 
-        $userLincense = new UserLicense();
-        $userLincense->fill($params);
-        $userLincense->save();
+        $userLicense = new UserLicense();
+        $userLicense->fill($params);
+        $userLicense->save();
 
         return response()->json(['message' => '更新完了']);
     }
 
     public function edit($id){
-        $userLincense = UserLicense::find($id);
-        return Inertia::render('変えてね', [
+        $userLicense = UserLicense::find($id);
+        return Inertia::render('EditLicense', [
+            'userId' => \Auth::id(),
             'allLicenses' => MasterLicense::all()->pluck('name', 'id'),
-            'userLicense' => $userLincense,
+            'userLicense' => $userLicense,
         ]);
     }
 
@@ -56,13 +57,13 @@ class UserLicenseController extends BaseController
         $params = [
             'user_id' => $request['user_id'],
             'master_license_id' => $request['master_license_id'],
+            'note' => $request['note'],
             'received_date' => $request['received_date'],
-            'work_end_date' => $request['work_end_date'],
         ];
 
-        $userLincense = UserLincense::find($id);
-        $userLincense->fill($params);
-        $userLincense->save();
+        $userLicense = UserLicense::find($id);
+        $userLicense->fill($params);
+        $userLicense->save();
 
         return response()->json(['message' => '更新完了']);
     }
