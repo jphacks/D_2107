@@ -197,7 +197,7 @@ export default defineComponent({
       console.log('hello')
       axios
         .post("/user-license/store", {
-          userId: this.userId,
+          user_id: this.userId,
           master_license_id: this.selectLicense,
           note: this.licenseText,
           received_date: "2021-08-16"
@@ -205,6 +205,7 @@ export default defineComponent({
         .then(function (responce) {
           console.log(responce);
           console.log("success");
+          window.location.href='/index'
         })
         .catch(function (error) {
           console.log(console.log(error));

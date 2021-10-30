@@ -43,7 +43,7 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
 
     Route::prefix('user-license')->group(function () {
         Route::get('/create', [UserLicenseController::class, 'create'])->name('create');
-        Route::post('/store', [JobExperienceController::class, 'store']);
+        Route::post('/store', [UserLicenseController::class, 'store']);
     });
 
     Route::get('/user', function (Request $request) {

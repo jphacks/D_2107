@@ -11,12 +11,11 @@ use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Http\Requests\AnyRequest;
 use App\Models\MasterLicense;
-use App\Models\UserLincense;
+use App\Models\UserLicense;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
+use Illuminate\Http\Request;
 use Inertia\Inertia;
-
 
 class UserLicenseController extends BaseController
 {
@@ -28,7 +27,9 @@ class UserLicenseController extends BaseController
         ]);
     }
 
-    public function store(CreateRequest $request){
+    public function store(Request $request)
+    {
+        Log::info($request);
         $params = [
             'user_id' => $request['user_id'],
             'master_license_id' => $request['master_license_id'],
@@ -36,7 +37,7 @@ class UserLicenseController extends BaseController
             'received_date' => $request['received_date'],
         ];
 
-        $userLincense = new UserLincense();
+        $userLincense = new UserLicense();
         $userLincense->fill($params);
         $userLincense->save();
 
