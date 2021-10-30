@@ -17,14 +17,14 @@ use App\Http\Controllers\UserLicenseController;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return Inertia::render('Dashboard');
@@ -46,6 +46,8 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::prefix('user-license')->group(function () {
         Route::get('/create', [UserLicenseController::class, 'create'])->name('create');
         Route::post('/store', [UserLicenseController::class, 'store']);
+        Route::get('/edit/{id}', [UserLicenseController::class, 'edit']);
+        Route::post('/edit/{id}', [UserLicenseController::class, 'post']);
     });
 
     Route::get('/user', function (Request $request) {

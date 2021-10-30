@@ -16,7 +16,7 @@ class UserLicense extends Model
         'received_date'
     ];
 
-    public function licence() {
+    public function license() {
         return $this->belongsTo(MasterLicense::class, 'master_license_id');
     }
 }
