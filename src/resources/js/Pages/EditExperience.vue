@@ -1,10 +1,5 @@
 <template>
   <app-layout title="add">
-    <template #header>
-      <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-        経験の追加
-      </h2>
-    </template>
     <t-input value="hello"></t-input>
     <section class="h-screen bg-gray-100 bg-opacity-50 mt-8">
       <div class="container max-w-2xl mx-auto shadow-md md:w-3/4">
@@ -165,6 +160,7 @@
                 <div class="relative">
                   <input
                     type="datetime"
+                    v-model="jobStartDate"
                     class="
                       rounded-lg
                       border-transparent
@@ -191,6 +187,7 @@
                 <div class="relative">
                   <input
                     type="text"
+                    v-model="jobEndDate"
                     id="user-info-phone"
                     class="
                       rounded-lg
@@ -241,7 +238,7 @@
                 rounded-lg
               "
             >
-              Save
+              更新
             </button>
           </div>
         </div>
@@ -260,9 +257,6 @@ import {
   ListboxOptions,
 } from "@headlessui/vue";
 import AppLayout from "@/Layouts/AppLayout.vue";
-import { ref } from 'vue';
-    import Datepicker from 'vue3-date-time-picker';
-    import 'vue3-date-time-picker/dist/main.css'
 
 
 export default defineComponent({
@@ -273,16 +267,8 @@ export default defineComponent({
     ListboxLabel,
     ListboxOption,
     ListboxOptions,
-    Datepicker
     
   },
-  setup() {
-            const date = ref();
-            
-            return {
-                date
-            }
-        },
   props: {
     userId: 0,
     allBusinesses: {},
@@ -304,15 +290,6 @@ export default defineComponent({
   }),
 
   methods: {
-    validate() {
-      this.$refs.form.validate();
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
-    },
     save() {
       console.log('hello')
       axios
@@ -321,8 +298,8 @@ export default defineComponent({
           jobTitle: this.jobTitle,
           businessId: this.selectBusiness,
           ocuppationId: this.selectOccupation,
-          workStartDate: "2021-08-16",
-          workEndDate: "2021-09-16",
+          workStartDate: this.jobStartDate,
+          workEndDate: this.jobEndDate,
         })
         .then(function (responce) {
           console.log(responce);
@@ -352,6 +329,8 @@ export default defineComponent({
     this.jobTitle = this.jobExperience.title
     this.selectBusiness = this.jobExperience.master_business_id
     this.selectOccupation = this.jobExperience.master_occupation_id
+    this.jobStartDate = this.jobExperience.work_start_date
+    this.jobEndDate = this.jobExperience.work_end_date
   },
 });
 </script>
