@@ -50,8 +50,10 @@ class JobExperienceController extends BaseController
 
     public function edit($id){
         $jobExperience = JobExperience::find($id);
-        return Inertia::render('変えてね', [
-            'allLicenses' => JobExperience::all()->pluck('name', 'id'),
+        return Inertia::render('EditExperience', [
+            'userId' => \Auth::id(),
+            'allBusinesses' =>  MasterBusiness::all()->pluck('name', 'id'),
+            'allOccupations' => MasterOccupation::all()->pluck('name', 'id'),
             'jobExperience' => $jobExperience,
         ]);
     }

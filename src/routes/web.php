@@ -35,6 +35,8 @@ Route::middleware('auth:sanctum', 'verified')->group(function () {
     Route::prefix('job-experience')->group(function () {
         Route::get('/create', [JobExperienceController::class, 'create'])->name('create');
         Route::get('/show', [JobExperienceController::class, 'show'])->name('show');
+        Route::get('/edit/{id}', [JobExperienceController::class, 'edit'])->name('edit');
+        Route::post('/edit/{id}', [JobExperienceController::class, 'update'])->name('update');
     });
     Route::get('/get_all_experiences', [JobExperienceController::class, 'getAllExperiences']);
     Route::get('/get_businesses', [JobExperienceController::class, 'getBusinesses']);
