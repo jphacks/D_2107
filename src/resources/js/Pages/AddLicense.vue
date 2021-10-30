@@ -135,7 +135,7 @@
                 rounded-lg
               "
             >
-              Save
+              追加
             </button>
           </div>
         </div>
