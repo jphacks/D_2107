@@ -45,7 +45,7 @@ class UserLicenseController extends BaseController
     }
 
     public function edit($id){
-        $userLincense = UserLincense::find($id);
+        $userLincense = UserLicense::find($id);
         return Inertia::render('変えてね', [
             'allLicenses' => MasterLicense::all()->pluck('name', 'id'),
             'userLicense' => $userLincense,
