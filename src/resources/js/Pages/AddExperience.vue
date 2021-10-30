@@ -287,6 +287,7 @@ export default defineComponent({
     menuStart: false,
     jobEndDate: null,
     menuEnd: false,
+    canSend: false
   }),
 
   methods: {
@@ -316,6 +317,7 @@ export default defineComponent({
           window.location.href='/index'
         })
         .catch(function (error) {
+          console.log("エラー")
           console.log(console.log(error));
         });
     },

@@ -28176,7 +28176,8 @@ __webpack_require__.r(__webpack_exports__);
       jobStartDate: null,
       menuStart: false,
       jobEndDate: null,
-      menuEnd: false
+      menuEnd: false,
+      canSend: false
     };
   },
   methods: {
@@ -28203,6 +28204,7 @@ __webpack_require__.r(__webpack_exports__);
         console.log("success");
         window.location.href = '/index';
       })["catch"](function (error) {
+        console.log("エラー");
         console.log(console.log(error));
       });
     },
