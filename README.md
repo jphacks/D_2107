@@ -1,4 +1,5 @@
 # 高卒向けスキル可視化サービス「cacica」
+
 ![スクリーンショット 2021-10-30 13 47 08](https://user-images.githubusercontent.com/68958226/139520566-69309520-1ade-4a61-a62e-58003ef8b975.png)
 
 ## 製品概要
