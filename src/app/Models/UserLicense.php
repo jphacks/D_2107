@@ -9,5 +9,14 @@ class UserLicense extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'master_license_id', 'note', 'received_date'];
+    protected $fillable = [
+        'user_id',
+        'master_license_id',
+        'note',
+        'received_date'
+    ];
+
+    public function licence() {
+        return $this->belongsTo(MasterLicense::class, 'master_license_id');
+    }
 }

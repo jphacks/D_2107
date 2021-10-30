@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\JobExperience;
+use App\Models\UserLicense;
 use Inertia\Inertia;
 
 class HomeController extends Controller
@@ -24,7 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return Inertia::render('Index', ['experiences' => JobExperience::where('user_id', \Auth::id())->get()->toArray()]);
+        return Inertia::render('Index', [
+            'experiences' => JobExperience::where('user_id', \Auth::id())->get()->toArray(),
+            'userLicenses' => UserLicense::where('user_id', \Auth::id())->get()->toArray(),
+        ]);
     }
 
     /**
