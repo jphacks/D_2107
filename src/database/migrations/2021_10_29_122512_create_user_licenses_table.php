@@ -19,7 +19,6 @@ class CreateUserLicensesTable extends Migration
             $table->bigInteger('master_license_id')->unsigned();
             $table->text('note');
             $table->date('received_date');
-            $table->date('work_end_date');
             $table->timestamps();
         });
     }
