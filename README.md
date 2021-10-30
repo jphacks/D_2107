@@ -1,14 +1,5 @@
 # 高卒向けスキル可視化サービス「cacica」
-
-![build](https://github.com/jphacks/C_2101/workflows/build/badge.svg)
-![test](https://github.com/jphacks/C_2101/workflows/test/badge.svg)
-![lint](https://github.com/jphacks/C_2101/workflows/lint/badge.svg)
-![deploy](https://github.com/jphacks/C_2101/workflows/deploy/badge.svg)
-![prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
-![version 1.0](https://img.shields.io/badge/version-1.0-yellow.svg)
-[![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
-
-[![IMAGE ALT TEXT HERE](https://jphacks.com/wp-content/uploads/2021/07/JPHACKS2021_ogp.jpg)](https://www.youtube.com/watch?v=LUPQFB4QyVo)
+![スクリーンショット 2021-10-30 13 47 08](https://user-images.githubusercontent.com/68958226/139520566-69309520-1ade-4a61-a62e-58003ef8b975.png)
 
 ## 製品概要
 高卒向けのスキル可視化サービス。
@@ -29,14 +20,13 @@ ex）　英検1級
 その結果、学歴がない状態でも、その人自身をみて転職やインターンに参加でき、
 スキルアップができる。
 
-
 ### 今後の展望
 ・経験や資格から能力値（スコア）を算出し、RPG的に能力値が溜まっていく状態にする。
 ・人事や企業でもユーザーのスキルを確認することができ、マッチングサービス展開していきたい。
 
 ### 注力したこと（こだわり等）
--
--
+- とにかくUIをシンプルにして、誰でも使いやすい状態にしたこと。
+- vue.js、Laravel、jetstream、inertia.jsといった最新技術を使って開発に取り組んだこと。
 
 ## 開発技術
-Laravel, Vue.js, MySQL
+vue.js、Laravel、jetstream、inertia.js、docker
